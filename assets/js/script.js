@@ -42,29 +42,74 @@ var question3 = {
 
 var questionList = [question1, question2, question3]
 
-// Timer function. Set variables
+// Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
-var timer = document.querySelector(".timetext")
-var startbutton = document.getElementById("startbutton")
+var timer = $('#timetext')
+var startbutton = $('#startbutton')
 var secondsLeft
-var underarray
+
+startbutton.on('click', setTime)
 
 function setTime() {
-    var secondsLeft = 10
-    var timerInterval = setInterval(function() {
+    var secondsLeft = 60
+    setInterval(function() {
       secondsLeft--;
-      timer.textContent = secondsLeft + " seconds left to solve the word!"
+      timer.text(secondsLeft + " seconds")
       
       if (secondsLeft === 1) {
-        timer.textContent = secondsLeft + " second left to solve the word!"
+        timer.text(secondsLeft + " second")
       }
-      if (secondsLeft === 0) {
-        // Stops execution 
-        clearInterval(timerInterval);
-        timer.textContent = "You Lost!"
-      }
+      // add an if statement --- IF secondsLeft equals zero, end game
+
+      // add an if statement --- IF question is answered correctly, add 10 seconds to secondsLeft
+
+      // add an if statement --- IF all questions are answered, stop interval and record secondsLeft 
   
     }, 1000);
-
-
 }
+
+// End Timer Function --------------------------------------------------------------------------------------------------------------------
+
+//add class tags to things currently shown
+//when clicking button, hide those things, and reveal a new set of items
+//after answering the new set of items, relace their text with another quesiton
+// Create question elements
+var myquestion = $('#question')
+var answeroptions = $('#answer')
+var list = $('<ul>')
+var listoptions = $('<li>')
+var original = $('.p')
+var newquestion = $('#newquestion')
+
+
+startbutton.on('click', remove)
+
+function displayq () {
+    var list = $('<ul>')
+    var listoptions = $('<li>')
+    for (i = 0; i < question1.answers.length; i++) {
+    listoptions.text(question1.answers[i])
+    list.append(listoptions)
+    newquestion.append(list)
+    console.log(newquestion)
+}}
+// 
+
+startbutton.on('click', displayq)
+
+function remove() {
+    original.empty(" ")
+}
+
+function add() {
+    
+}
+
+
+
+// Create answers for the question
+/*for (i = 0; i < questionList.length; i++) {
+    if 
+}
+*/
+//start quiz
