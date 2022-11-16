@@ -8,10 +8,10 @@ Psuedo Code:
 var question1 =  {
     question: "Commonly used data types DO NOT include:",
     answers: {
-        a: 'string',
-        b: 'booleans',
-        c: 'alerts',
-        d: 'numbers',
+        0: 'string',
+        1: 'booleans',
+        2: 'alerts',
+        3: 'numbers',
     },
     correctAnswer: 'c'
 }
@@ -74,35 +74,50 @@ function setTime() {
 //when clicking button, hide those things, and reveal a new set of items
 //after answering the new set of items, relace their text with another quesiton
 // Create question elements
-var myquestion = $('#question')
-var answeroptions = $('#answer')
-var list = $('<ul>')
-var listoptions = $('<li>')
 var original = $('.p')
+
+var ask = $('<h2>')
+var list = $('<ol>')
+var listoptions = $('<li>')
 var newquestion = $('#newquestion')
 
 
-startbutton.on('click', remove)
+startbutton.on('click', startgame)
+
 
 function displayq () {
-    var list = $('<ul>')
-    var listoptions = $('<li>')
-    for (i = 0; i < question1.answers.length; i++) {
-    listoptions.text(question1.answers[i])
-    list.append(listoptions)
-    newquestion.append(list)
-    console.log(newquestion)
-}}
-// 
-
-startbutton.on('click', displayq)
-
-function remove() {
-    original.empty(" ")
+    var ask = $('<h2>')
+    var list = $('<ol>')
+    var newquestion = $('#newquestion')
+    
+    for (i = 0; i < 4; i++) {
+        //create an <li> tag
+        var yup = $('<li>')
+        yup.attr('class', 'listbutton')
+        //Make the content of the <li> equal a possible answer
+        yup.text(question1.answers[i])
+        //Push the possible answer to the list of options
+        list.append(yup);
+    }
+    //create a h2 with the question
+    ask.text(question1.question)
+    //append list to ask
+    ask.append(list)
+    
+    newquestion.append(ask)
 }
 
-function add() {
-    
+// 
+
+
+function remove() {
+    original.remove()
+
+}
+
+function startgame() {
+    remove ()
+    displayq ()
 }
 
 
