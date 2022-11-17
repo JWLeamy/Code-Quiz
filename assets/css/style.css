@@ -28,14 +28,48 @@ button {
     width: 100px;
 }
 
-.listbutton {
+.listbutton0 {
     background-color: darkslateblue;
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
 }
 
-.listbutton:hover {
+.listbutton1 {
+    background-color: darkslateblue;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.listbutton2 {
+    background-color: darkslateblue;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.listbutton3 {
+    background-color: darkslateblue;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.listbutton0:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.listbutton1:hover {
+    color: white;
+    cursor: pointer;
+}
+.listbutton2:hover {
+    color: white;
+    cursor: pointer;
+}
+.listbutton3:hover {
     color: white;
     cursor: pointer;
 }

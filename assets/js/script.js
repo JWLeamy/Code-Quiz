@@ -4,6 +4,7 @@ Psuedo Code:
 - Make an array filled with questions
 */
 
+
 //First, make the question objects
 var question1 =  {
     question: "Commonly used data types DO NOT include:",
@@ -13,52 +14,56 @@ var question1 =  {
         2: 'alerts',
         3: 'numbers',
     },
-    correctAnswer: 'c'
+    correctAnswer: 'alerts'
 }
 
 var question2 = {
     question: "The condition in an if / else statement is enclosed with _____.",
     answers: {
-        a: 'quotes',
-        b: 'curly brackets',
-        c: 'parenthesis',
-        d: 'square brackets',
+        0: 'quotes',
+        1: 'curly brackets',
+        2: 'parenthesis',
+        3: 'square brackets',
     },
-    correctAnswer: 'c'
+    correctAnswer: 'parenthesis'
 }
 
 var question3 = {
     question: "Arrays in JavaScript can be used to store _______",
     answers: {
-        a: 'numbers and strings',
-        b: 'other arrays',
-        c: 'booleans',
-        d: 'all of the above',
+        0: 'numbers and strings',
+        1: 'other arrays',
+        2: 'booleans',
+        3: 'all of the above',
     },
-    correctAnswer: 'd'
+    correctAnswer: 'all of the above'
 }
 
 // Second, Make an array that contains all of the question objects
 
 var questionList = [question1, question2, question3]
 
+
 // Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
 var timer = $('#timetext')
 var startbutton = $('#startbutton')
 var secondsLeft
-
-startbutton.on('click', setTime)
+var press = $('.listbutton')
 
 function setTime() {
-    var secondsLeft = 60
+    var questionList = [question1, question2, question3]
+   var secondsLeft = 60
     setInterval(function() {
       secondsLeft--;
-      timer.text(secondsLeft + " seconds")
       
+      timer.text(secondsLeft + " seconds")    
+
       if (secondsLeft === 1) {
         timer.text(secondsLeft + " second")
       }
+      
+      
       // add an if statement --- IF secondsLeft equals zero, end game
 
       // add an if statement --- IF question is answered correctly, add 10 seconds to secondsLeft
@@ -66,6 +71,19 @@ function setTime() {
       // add an if statement --- IF all questions are answered, stop interval and record secondsLeft 
   
     }, 1000);
+    
+
+    $(document).on("click", ".listbutton", function(x){
+        x = 0;
+        if ($(this).text() === questionList[x].correctAnswer) {
+            timer.text(secondsLeft + 10 + " seconds")
+            x++;
+        }
+        else if ($(this).text() !== questionList[x].correctAnswer){ 
+            timer.text(secondsLeft - 10 + " seconds")
+            x--;
+      }})
+    
 }
 
 // End Timer Function --------------------------------------------------------------------------------------------------------------------
@@ -76,16 +94,15 @@ function setTime() {
 // Create question elements
 var original = $('.p')
 
-var ask = $('<h2>')
-var list = $('<ol>')
 var listoptions = $('<li>')
 var newquestion = $('#newquestion')
+var x = 0
 
+startbutton.on('click', both)
+//Loop this function if they answer correctly
+function displayq (x) {
 
-startbutton.on('click', startgame)
-
-
-function displayq () {
+    var questionList = [question1, question2, question3]
     var ask = $('<h2>')
     var list = $('<ol>')
     var newquestion = $('#newquestion')
@@ -93,34 +110,82 @@ function displayq () {
     for (i = 0; i < 4; i++) {
         //create an <li> tag
         var yup = $('<li>')
-        yup.attr('class', 'listbutton')
+        yup.attr('class', 'listbutton' + [x])
         //Make the content of the <li> equal a possible answer
-        yup.text(question1.answers[i])
+        yup.text(questionList[x].answers[i])
         //Push the possible answer to the list of options
         list.append(yup);
     }
+    ask.attr('class', 'p' + [x])
     //create a h2 with the question
-    ask.text(question1.question)
+    ask.text(questionList[x].question)
     //append list to ask
     ask.append(list)
-    
+    //append list to newquestion
     newquestion.append(ask)
+
+}
+function both (){
+    var x = 0
+    displayq(x)
+    $(document).on("click", ".listbutton" + [x], function(){
+        x = 0
+        if ($(this).text() === questionList[x].correctAnswer) {
+            addnew(x)
+            switchquestions(x)
+        }
+        if ($(this).text() !== questionList[x].correctAnswer){ 
+            console.log(questionList[x].correctAnswer)
+      }})
 }
 
-// 
+function addnew(x) {
+    $('.listbutton' + [x]).remove()
+    $('.p' + [x]).remove()
+    x++;
+    displayq(x)
+}
+
+//if button.click equal answer
+
+
+function switchquestions(x) {{
+    $(document).on("click", ".listbutton" + [x], function(){
+        
+        if ($(this).text() === questionList[x].correctAnswer) {
+            addnew(x)
+        }
+        if ($(this).text() !== questionList[x].correctAnswer){ 
+            console.log(questionList[x].correctAnswer)
+         }})}
+}
 
 
 function remove() {
     original.remove()
-
 }
 
-function startgame() {
-    remove ()
-    displayq ()
+function wholegame() {
+    
+    remove()
+    setTime()
+    displayq(0)
 }
 
-
+function click () {
+    var questionList = [question1, question2, question3]
+    
+   var x = 0
+    $(document).on("click", ".listbutton" + [x], function(){
+        if ($(this).text() === questionList[x].correctAnswer) {
+            $('.listbutton' + [x]).remove()
+            x++;
+            displayq(x);
+        }
+        if ($(this).text() !== questionList[x].correctAnswer){ 
+            console.log(questionList[x].correctAnswer)
+      }})
+}
 
 // Create answers for the question
 /*for (i = 0; i < questionList.length; i++) {
@@ -128,3 +193,17 @@ function startgame() {
 }
 */
 //start quiz
+
+
+/*
+var x = 0
+    $(document).on("click", ".listbutton" + [x], function(){
+        if ($(this).text() === questionList[x].correctAnswer) {
+            $('.listbutton' + [x]).remove()
+            x++;
+            displayq(x);
+        }
+        if ($(this).text() !== questionList[x].correctAnswer){ 
+            console.log(questionList[x].correctAnswer)
+      }})
+*/
