@@ -1,9 +1,3 @@
-/*
-Psuedo Code:
-- When the user clicks a start button, the quiz starts (eventlistener or .on)
-- Make an array filled with questions
-*/
-
 
 //First, make the question objects
 var question1 =  {
@@ -16,7 +10,6 @@ var question1 =  {
     },
     correctAnswer: 'alerts'
 }
-
 var question2 = {
     question: "The condition in an if / else statement is enclosed with _____.",
     answers: {
@@ -27,7 +20,6 @@ var question2 = {
     },
     correctAnswer: 'parenthesis'
 }
-
 var question3 = {
     question: "Arrays in JavaScript can be used to store _______",
     answers: {
@@ -38,22 +30,18 @@ var question3 = {
     },
     correctAnswer: 'all of the above'
 }
-
 // Second, Make an array that contains all of the question objects
-
 var questionList = [question1, question2, question3]
-
-
 // Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
 var timer = $('#timetext')
 var startbutton = $('#startbutton')
-var secondsLeft
+var secondsLeft = 60
 var press = $('.listbutton')
 
 function setTime() {
-    var questionList = [question1, question2, question3]
-   var secondsLeft = 60
+      questionList
+      secondsLeft = 60
     setInterval(function() {
       secondsLeft--;
       
@@ -80,96 +68,91 @@ function setTime() {
             x++;
         }
         else if ($(this).text() !== questionList[x].correctAnswer){ 
-            timer.text(secondsLeft - 10 + " seconds")
-            x--;
+            secondsLeft = secondsLeft - 10;
       }})
     
 }
 
 // End Timer Function --------------------------------------------------------------------------------------------------------------------
 
-//add class tags to things currently shown
-//when clicking button, hide those things, and reveal a new set of items
-//after answering the new set of items, relace their text with another quesiton
-// Create question elements
 var original = $('.p')
-
-var listoptions = $('<li>')
 var newquestion = $('#newquestion')
-var x = 0
+var ques = $('#question')
+var ans = $('#answers')
 
-startbutton.on('click', both)
 //Loop this function if they answer correctly
-function displayq (x) {
 
-    var questionList = [question1, question2, question3]
+function displayq (x) {
     var ask = $('<h2>')
     var list = $('<ol>')
-    var newquestion = $('#newquestion')
     
-    for (i = 0; i < 4; i++) {
-        //create an <li> tag
-        var yup = $('<li>')
-        yup.attr('class', 'listbutton' + [x])
-        //Make the content of the <li> equal a possible answer
-        yup.text(questionList[x].answers[i])
-        //Push the possible answer to the list of options
-        list.append(yup);
-    }
-    ask.attr('class', 'p' + [x])
-    //create a h2 with the question
-    ask.text(questionList[x].question)
-    //append list to ask
-    ask.append(list)
-    //append list to newquestion
-    newquestion.append(ask)
+                for (var i = 0; i < 4; i++) {
+                        questionList = [question1, question2, question3]
+                        //create an <li> tag
+                        var yup = $('<button>')
+                        yup.attr('class', 'listbutton')
+                        //Make the content of the <li> equal a possible answer
+                        yup.text(questionList[x].answers[i])
+                        //Push the possible answer to the list of options
+                        list.append(yup);
+                        
+                    }
+        ask.attr('class', 'p' + [x])
+            //create a h2 with the question
+        ask.text(questionList[x].question);
+            //append list to ask
+        ask.append(list)
+            //append list to newquestion
+        newquestion.append(ask)
 
+        switchquestions(x)
+    }
+
+
+function change () {
+    ques.text(question1.question)
+    ans.text()
 }
+function showquestions () {
+    remove()
+    displayq()
+}
+
+
 function both (){
-    var x = 0
-    displayq(x)
-    $(document).on("click", ".listbutton" + [x], function(){
-        x = 0
+    remove()
+    displayq(0)
+    $(document).on("click", ".listbutton", function(x){
+        var x = 0
         if ($(this).text() === questionList[x].correctAnswer) {
-            addnew(x)
-            switchquestions(x)
+            $('.p').remove()
+            x++;
+            displayq(x)
         }
         if ($(this).text() !== questionList[x].correctAnswer){ 
             console.log(questionList[x].correctAnswer)
       }})
 }
 
+
+
+
 function addnew(x) {
-    $('.listbutton' + [x]).remove()
-    $('.p' + [x]).remove()
+    $('.p').remove()
     x++;
     displayq(x)
 }
 
 //if button.click equal answer
 
-
-function switchquestions(x) {{
-    $(document).on("click", ".listbutton" + [x], function(){
-        
-        if ($(this).text() === questionList[x].correctAnswer) {
-            addnew(x)
-        }
-        if ($(this).text() !== questionList[x].correctAnswer){ 
-            console.log(questionList[x].correctAnswer)
-         }})}
-}
-
-
-function remove() {
-    original.remove()
-}
-
-function wholegame() {
+function switchquestions(x) {
     
-    remove()
-    setTime()
-    displayq(0)
+    $(document).on("click", ".listbutton" + [x], function(){
+        x = 0
+        if ($(this).text() === questionList[x].correctAnswer) {
+            x++;
+            displayq(x)
+        }})
 }
 
 function click () {
