@@ -155,5 +155,22 @@ $('.submitscore').on("click", function(){
     }
 })
 
-list.text(`${initials} -- ${Mscore}`)
-    $('.scorelist').append(allScores)
+/*list.text(`${initials} -- ${Mscore}`)
+    $('.scorelist').append(allScores)*/
+
+    function generatescores() {
+        scorelist = JSON.parse(localStorage.getItem("allScores"));
+        scorelist.sort((a,b) => (a.score > b.score ? -1 : 1))
+        console.log(scorelist)
+
+        newlist = scorelist.slice(0, 5)
+
+
+        newlist.forEach(element => {
+        var listitem = $('<li>');
+        listitem.text(`${element.name} --- ${element.score}`)
+        $('.scorelist').append(listitem)            
+        });
+    }
+
+    generatescores()
