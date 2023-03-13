@@ -110,17 +110,7 @@ function displayq (x) {
         //css("visibility", "hidden")
 }
 
-
-function switchquestions(x) {
-    
-    $(document).on("click", ".listbutton" + [x], function(){
-        x = 0
-        if ($(this).text() === questionList[x].correctAnswer) {
-            x++;
-            displayq(x)
-        }})
-}
-
+//based on your clicked answer, you will either move on to the next question or subtract 10 points from your score
 function game (x) {
     console.log(yessir[x])
     $(`.listbutton${x}`).on("click", function(){
@@ -132,4 +122,9 @@ function game (x) {
                secondsLeft = secondsLeft - 10;
             }
         })
+}
+
+function showscore() {
+    $('.endgame').show();
+    $('.submitscore').click()
 }
