@@ -137,9 +137,23 @@ function showscore() {
 list = $('<li>')
 $('.submitscore').on("click", function(){
     var initials = $('.initials').val()
-    var score = $('.finalscore').text()
-    console.log(initials)
-    console.log(score)
-    list.text(`${initials} -- ${score}`)
-    $('.scorelist').append(list)
+    var Mscore = $('.finalscore').text()
+
+    if (initials === "") {
+        alert("Please Insert Initials")
+    } else {
+        var allScores = JSON.parse(localStorage.getItem("allScores"))
+        if (!allScores) {allScores = []}
+        console.log(allScores)
+        var currentHighscore = {
+            name : initials,
+            score : Mscore
+        };
+        console.log(allScores);
+        allScores.push(currentHighscore);
+        localStorage.setItem("allScores", JSON.stringify(allScores));
+    }
 })
+
+list.text(`${initials} -- ${Mscore}`)
+    $('.scorelist').append(allScores)
