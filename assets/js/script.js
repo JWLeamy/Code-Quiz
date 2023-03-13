@@ -154,7 +154,7 @@ $(".submitscore").on("click", function () {
     console.log(allScores);
     allScores.push(currentHighscore);
     localStorage.setItem("allScores", JSON.stringify(allScores));
-    alert("Your Score is saved!")
+    alert("Your Score is saved! Refresh to see if you broke the top 5")
   }
 });
 
@@ -180,6 +180,7 @@ function generatescores() {
 }
 generatescores()
 
+//opens and closes scoreboard when needed
 $(".showboard").on("click", function () {
   if ($('.scoreboard').css('display') === 'none') {
     $('.scoreboard').show()
