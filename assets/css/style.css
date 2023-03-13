@@ -14,62 +14,42 @@ main div {
     align-items: center;
 }
 
+ol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 main p {
     width: 60%;
     text-align: center;
 }
 
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.p {
+    display: flex;
+    display: hidden;
+}
 button {
     background-color: darkslateblue;
     border-radius: 5px 5px 5px 5px;
     color: white;
     border: 0;
     height: 40px;
-    width: 100px;
+    width: 500px;
+    margin: 10px;
 }
 
-.listbutton {
-    background-color: darkslateblue;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-}
 
-.listbutton1 {
-    background-color: darkslateblue;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-}
 
-.listbutton2 {
-    background-color: darkslateblue;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-}
-
-.listbutton3 {
-    background-color: darkslateblue;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-}
-
-.listbutton0:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.listbutton1:hover {
-    color: white;
-    cursor: pointer;
-}
-.listbutton2:hover {
-    color: white;
-    cursor: pointer;
-}
-.listbutton3:hover {
+.button:hover {
     color: white;
     cursor: pointer;
 }

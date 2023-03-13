@@ -1,6 +1,6 @@
 
 //First, make the question objects
-var question1 =  {
+const question1 =  {
     question: "Commonly used data types DO NOT include:",
     answers: {
         0: 'string',
@@ -10,7 +10,7 @@ var question1 =  {
     },
     correctAnswer: 'alerts'
 }
-var question2 = {
+const question2 = {
     question: "The condition in an if / else statement is enclosed with _____.",
     answers: {
         0: 'quotes',
@@ -20,7 +20,7 @@ var question2 = {
     },
     correctAnswer: 'parenthesis'
 }
-var question3 = {
+const question3 = {
     question: "Arrays in JavaScript can be used to store _______",
     answers: {
         0: 'numbers and strings',
@@ -30,8 +30,10 @@ var question3 = {
     },
     correctAnswer: 'all of the above'
 }
+
 // Second, Make an array that contains all of the question objects
-var questionList = [question1, question2, question3]
+const questionList = [question1, question2, question3]
+var yessir = [question1.correctAnswer, question2.correctAnswer, question3.correctAnswer]
 // Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
 var timer = $('#timetext')
@@ -78,19 +80,29 @@ function setTime() {
 var original = $('.p')
 var newquestion = $('#newquestion')
 var ques = $('#question')
-var ans = $('#answers')
+var ans = $('#answers') 
+var whole = $('.whole')
 
 //Loop this function if they answer correctly
+startbutton.on('click', createlist())
 
+// creates a question list for all the questions avaliable
+function createlist() {
+    for (var i = 0; i < questionList.length; i ++) {
+        displayq(i)
+    }
+    $('.p0').show();
+    game(0)
+}
+
+//creates a list format for a single question
 function displayq (x) {
     var ask = $('<h2>')
     var list = $('<ol>')
     
                 for (var i = 0; i < 4; i++) {
-                        questionList = [question1, question2, question3]
-                        //create an <li> tag
                         var yup = $('<button>')
-                        yup.attr('class', 'listbutton')
+                        yup.attr('class', `listbutton${x}`)
                         //Make the content of the <li> equal a possible answer
                         yup.text(questionList[x].answers[i])
                         //Push the possible answer to the list of options
@@ -103,44 +115,21 @@ function displayq (x) {
             //append list to ask
         ask.append(list)
             //append list to newquestion
-        newquestion.append(ask)
+        whole.append(ask)
 
-        switchquestions(x)
+        $(`.p${x}`).hide()
+        
+        //css("visibility", "hidden")
     }
 
 
-function change () {
-    ques.text(question1.question)
-    ans.text()
+function remove () {
+    $('.p').hide()
 }
-function showquestions () {
-    remove()
-    displayq()
-}
-
-
-function both (){
-    remove()
-    displayq(0)
-    $(document).on("click", ".listbutton", function(x){
-        var x = 0
-        if ($(this).text() === questionList[x].correctAnswer) {
-            $('.p').remove()
-            x++;
-            displayq(x)
-        }
-        if ($(this).text() !== questionList[x].correctAnswer){ 
-            console.log(questionList[x].correctAnswer)
-      }})
-}
-
-
-
 
 function addnew(x) {
     $('.p').remove()
-    x++;
-    displayq(x)
+   
 }
 
 //if button.click equal answer
@@ -170,6 +159,17 @@ function click () {
       }})
 }
 
+function game (x) {
+    console.log(yessir[x])
+    $(`.listbutton${x}`).on("click", function(){
+            if ($(this).text() === yessir[x]) {
+                $(`.p${x}`).hide();
+                $(`.p${x + 1}`).show();
+                game(x + 1)
+            } 
+        })
+}
+
 // Create answers for the question
 /*for (i = 0; i < questionList.length; i++) {
     if 
@@ -184,7 +184,7 @@ var x = 0
         if ($(this).text() === questionList[x].correctAnswer) {
             $('.listbutton' + [x]).remove()
             x++;
-            displayq(x);
+            disp`layq(x);
         }
         if ($(this).text() !== questionList[x].correctAnswer){ 
             console.log(questionList[x].correctAnswer)
