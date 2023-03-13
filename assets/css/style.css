@@ -88,3 +88,13 @@ button {
 .playagain {
     width: 40%;
 }
+
+.scoreboard {
+    display: none;
+}
+
+.scoreboard h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

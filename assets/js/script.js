@@ -132,6 +132,7 @@ function showscore() {
     clearInterval(timeint);
     $('.finalscore').text(secondsLeft)
     $('.endgame').show()
+    generatescores()
 }
 
 list = $('<li>')
@@ -155,6 +156,11 @@ $('.submitscore').on("click", function(){
     }
 })
 
+$('.playagain').on("click", function(){
+    location.reload()
+}
+)
+
 /*list.text(`${initials} -- ${Mscore}`)
     $('.scorelist').append(allScores)*/
 
@@ -171,6 +177,7 @@ $('.submitscore').on("click", function(){
         listitem.text(`${element.name} --- ${element.score}`)
         $('.scorelist').append(listitem)            
         });
+
+        $('.scoreboard').show()
     }
 
-    generatescores()
