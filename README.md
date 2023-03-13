@@ -41,3 +41,49 @@ THEN I can save my initials and score
 5. Javascript - used to generate the password after interacting with the webpage
 
 ## Code Snippet Java
+```
+//creates a list format for a single question
+function displayq(x) {
+  var ask = $("<h2>");
+  var list = $("<ol>");
+
+  for (var i = 0; i < 4; i++) {
+    var yup = $("<button>");
+    yup.attr("class", `listbutton${x}`);
+    //Make the content of the <li> equal a possible answer
+    yup.text(questionList[x].answers[i]);
+    //Push the possible answer to the list of options
+    list.append(yup);
+  }
+  ask.attr("class", "p" + [x]);
+  //create a h2 with the question
+  ask.text(questionList[x].question);
+  //append list to ask
+  ask.append(list);
+  //append list to newquestion
+  whole.append(ask);
+
+  $(`.p${x}`).hide();
+
+  //css("visibility", "hidden")
+}
+
+//based on your clicked answer, you will either move on to the next question or subtract 10 points from your score
+function game(x) {
+  console.log(x);
+  if (!yessir[x]) {
+    showscore();
+  } else {
+    console.log(yessir[x]);
+    $(`.listbutton${x}`).on("click", function () {
+      if ($(this).text() === yessir[x]) {
+        $(`.p${x}`).hide();
+        $(`.p${x + 1}`).show();
+        game(x + 1);
+      } else {
+        secondsLeft = secondsLeft - 10;
+      }
+    });
+  }
+}
+```
