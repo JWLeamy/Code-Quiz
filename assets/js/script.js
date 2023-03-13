@@ -53,7 +53,7 @@ function setTime() {
     
         if(secondsLeft === 0) {
           clearInterval(setTime);
-          showScore();
+          showscore();
         }
       }, 1000);
       game(0);
@@ -112,6 +112,9 @@ function displayq (x) {
 
 //based on your clicked answer, you will either move on to the next question or subtract 10 points from your score
 function game (x) {
+    console.log(x)
+    if (!yessir[x]) {showscore()}
+    else {
     console.log(yessir[x])
     $(`.listbutton${x}`).on("click", function(){
             if ($(this).text() === yessir[x]) {
@@ -121,10 +124,9 @@ function game (x) {
             } else {
                secondsLeft = secondsLeft - 10;
             }
-        })
+        })}
 }
 
 function showscore() {
-    $('.endgame').show();
-    $('.submitscore').click()
+    $('.endgame').show()
 }

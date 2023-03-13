@@ -61,6 +61,25 @@ button {
     height: 40px;
 }
 
+.endgame {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+}
+
+.endgame h2 {
+    display: flex;
+    justify-content: center;
+}
+.input {
+    justify-content: center;
+    align-items: center;
+}
+
+.finalscore {
+    font-size: 50px;
+}
 .playagain {
     width: 80%;
 }
