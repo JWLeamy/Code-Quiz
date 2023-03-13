@@ -102,8 +102,6 @@ function displayq(x) {
   whole.append(ask);
 
   $(`.p${x}`).hide();
-
-  //css("visibility", "hidden")
 }
 
 //based on your clicked answer, you will either move on to the next question or subtract 10 points from your score
