@@ -169,24 +169,3 @@ function game (x) {
             } 
         })
 }
-
-// Create answers for the question
-/*for (i = 0; i < questionList.length; i++) {
-    if 
-}
-*/
-//start quiz
-
-
-/*
-var x = 0
-    $(document).on("click", ".listbutton" + [x], function(){
-        if ($(this).text() === questionList[x].correctAnswer) {
-            $('.listbutton' + [x]).remove()
-            x++;
-            disp`layq(x);
-        }
-        if ($(this).text() !== questionList[x].correctAnswer){ 
-            console.log(questionList[x].correctAnswer)
-      }})
-*/
