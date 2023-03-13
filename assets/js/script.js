@@ -33,6 +33,7 @@ const question3 = {
 
 // Second, Make an array that contains all of the question objects
 const questionList = [question1, question2, question3]
+// array that contains the answers
 var yessir = [question1.correctAnswer, question2.correctAnswer, question3.correctAnswer]
 // Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
@@ -41,37 +42,21 @@ var startbutton = $('#startbutton')
 var secondsLeft = 60
 var press = $('.listbutton')
 
+function losetime() {
+    secondsLeft-10;
+}
+
 function setTime() {
-      questionList
-      secondsLeft = 60
     setInterval(function() {
-      secondsLeft--;
-      
-      timer.text(secondsLeft + " seconds")    
-
-      if (secondsLeft === 1) {
-        timer.text(secondsLeft + " second")
-      }
-      
-      
-      // add an if statement --- IF secondsLeft equals zero, end game
-
-      // add an if statement --- IF question is answered correctly, add 10 seconds to secondsLeft
-
-      // add an if statement --- IF all questions are answered, stop interval and record secondsLeft 
-  
-    }, 1000);
+        secondsLeft--;
+        timer.text("Time left: " + secondsLeft);
     
-
-    $(document).on("click", ".listbutton", function(x){
-        x = 0;
-        if ($(this).text() === questionList[x].correctAnswer) {
-            timer.text(secondsLeft + 10 + " seconds")
-            x++;
+        if(secondsLeft === 0) {
+          clearInterval(setTime);
+          showScore();
         }
-        else if ($(this).text() !== questionList[x].correctAnswer){ 
-            secondsLeft = secondsLeft - 10;
-      }})
+      }, 1000);
+      game(0);
     
 }
 
@@ -83,16 +68,19 @@ var ques = $('#question')
 var ans = $('#answers') 
 var whole = $('.whole')
 
-//Loop this function if they answer correctly
-startbutton.on('click', createlist())
 
 // creates a question list for all the questions avaliable
 function createlist() {
+    // iterates through each question prompt and appends it to the document (while keeping it hidden)
     for (var i = 0; i < questionList.length; i ++) {
         displayq(i)
     }
+    // hides initial prompt
+    $('#newquestion').hide()
+    //shows the first question. From then on, the game function shows/hides the remaining questions accordingly
     $('.p0').show();
-    game(0)
+    //set time interval
+    setTime()
 }
 
 //creates a list format for a single question
@@ -120,19 +108,8 @@ function displayq (x) {
         $(`.p${x}`).hide()
         
         //css("visibility", "hidden")
-    }
-
-
-function remove () {
-    $('.p').hide()
 }
 
-function addnew(x) {
-    $('.p').remove()
-   
-}
-
-//if button.click equal answer
 
 function switchquestions(x) {
     
@@ -144,21 +121,6 @@ function switchquestions(x) {
         }})
 }
 
-function click () {
-    var questionList = [question1, question2, question3]
-    
-   var x = 0
-    $(document).on("click", ".listbutton" + [x], function(){
-        if ($(this).text() === questionList[x].correctAnswer) {
-            $('.listbutton' + [x]).remove()
-            x++;
-            displayq(x);
-        }
-        if ($(this).text() !== questionList[x].correctAnswer){ 
-            console.log(questionList[x].correctAnswer)
-      }})
-}
-
 function game (x) {
     console.log(yessir[x])
     $(`.listbutton${x}`).on("click", function(){
@@ -166,6 +128,8 @@ function game (x) {
                 $(`.p${x}`).hide();
                 $(`.p${x + 1}`).show();
                 game(x + 1)
-            } 
+            } else {
+               secondsLeft = secondsLeft - 10;
+            }
         })
 }
