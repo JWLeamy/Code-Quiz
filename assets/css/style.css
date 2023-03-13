@@ -102,3 +102,7 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.showboard {
+    width: 10%;
+}

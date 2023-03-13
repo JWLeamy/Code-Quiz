@@ -130,7 +130,7 @@ function showscore() {
   clearInterval(timeint);
   $(".finalscore").text(secondsLeft);
   $(".endgame").show();
-  generatescores();
+  $('.scoreboard').show()
 }
 
 list = $("<li>");
@@ -177,6 +177,15 @@ function generatescores() {
     listitem.text(`${element.name} --- ${element.score}`);
     $(".scorelist").append(listitem);
   });
-
-  $(".scoreboard").show();
 }
+generatescores()
+
+$(".showboard").on("click", function () {
+  if ($('.scoreboard').css('display') === 'none') {
+    $('.scoreboard').show()
+    $(".showboard").text("Close High Scores")
+  } else {
+    $('.scoreboard').hide()
+    $(".showboard").text("Show High Scores")
+  }
+})
