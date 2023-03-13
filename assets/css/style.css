@@ -77,9 +77,14 @@ button {
     align-items: center;
 }
 
+.initials {
+    text-align: center;
+    font-size: xx-large;
+}
+
 .finalscore {
     font-size: 50px;
 }
 .playagain {
-    width: 80%;
+    width: 40%;
 }

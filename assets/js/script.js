@@ -47,12 +47,12 @@ function losetime() {
 }
 
 function setTime() {
-    setInterval(function() {
+    timeint = setInterval(function() {
         secondsLeft--;
         timer.text("Time left: " + secondsLeft);
     
         if(secondsLeft === 0) {
-          clearInterval(setTime);
+          clearInterval(timeint);
           showscore();
         }
       }, 1000);
@@ -127,6 +127,19 @@ function game (x) {
         })}
 }
 
+// clears the time if the quiz is over, provides a submit score option
 function showscore() {
+    clearInterval(timeint);
+    $('.finalscore').text(secondsLeft)
     $('.endgame').show()
 }
+
+list = $('<li>')
+$('.submitscore').on("click", function(){
+    var initials = $('.initials').val()
+    var score = $('.finalscore').text()
+    console.log(initials)
+    console.log(score)
+    list.text(`${initials} -- ${score}`)
+    $('.scorelist').append(list)
+})
