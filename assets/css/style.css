@@ -7,6 +7,10 @@ header {
     justify-content: space-between;
 }
 
+h2 {
+    text-align: center;
+}
+
 main div {
     display: flex;
     flex-direction: column;
