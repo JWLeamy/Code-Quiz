@@ -29,14 +29,47 @@ const question3 = {
   },
   correctAnswer: "all of the above",
 };
+const question4 = {
+  question: "What does DOM stand for?",
+  answers: {
+    0: "Document Object Model",
+    1: "Display Object Management",
+    2: "Digital Ordinance Model",
+    3: "Desktop Oriented Mode",
+  },
+  correctAnswer: "Document Object Model",
+};
+const question5 = {
+  question: "What is used primarily to add styling to a web page?",
+  answers: {
+    0: "HTML",
+    1: "CSS",
+    2: "Python",
+    3: "React.js",
+  },
+  correctAnswer: "CSS",
+};
+const question6 = {
+  question: "When is localStorage data cleared?",
+  answers: {
+    0: "No expiration time",
+    1: "on reload",
+    2: "after closing your browser",
+    3: "after restarting your computer",
+  },
+  correctAnswer: "No expiration time",
+};
 
 // Second, Make an array that contains all of the question objects
-const questionList = [question1, question2, question3];
+const questionList = [question1, question2, question3, question4, question5, question6];
 // array that contains the answers
 var yessir = [
   question1.correctAnswer,
   question2.correctAnswer,
   question3.correctAnswer,
+  question4.correctAnswer,
+  question5.correctAnswer,
+  question6.correctAnswer,
 ];
 // Timer function. Set variables --------------------------------------------------------------------------------------------------------------------
 
